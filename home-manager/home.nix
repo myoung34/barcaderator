@@ -50,12 +50,14 @@
     homeDirectory = "/home/barcaderator";
   };
 
-  # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
+  programs.firefox.enable = false;
+
   home.packages = with pkgs; [ 
     steam 
     attract-mode
     mame
+    backblaze-b2
   ];
 
   home.file = { 
@@ -63,16 +65,8 @@
       source = ../home/barcaderator/.attract;
       recursive = true;
     };
-    ".local/mame" = {
-      source = ../home/barcaderator/.local/mame;
-      recursive = true;
-    };
     ".mame" = {
       source = ../home/barcaderator/.mame;
-      recursive = true;
-    };
-    ".local/steam" = {
-      source = ../home/barcaderator/.local/steam;
       recursive = true;
     };
     ".gitconfig" = {

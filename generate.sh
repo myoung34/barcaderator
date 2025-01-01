@@ -1,14 +1,16 @@
 #!/bin/env bash
 
+mkdir -p ~/.attract/romlists
+
 #steam snap files (images and videos)
-mkdir -p home/barcaderator/.local/steam
+mkdir -p ~/.local/steam
 pushd . >/dev/null
-cd home/barcaderator/.local/steam
+cd ~/.local/steam
 b2 sync b2://barcaderator/steam/ .
 popd >/dev/null
 
-echo $'#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons;Series;Language;Region;Rating' >./home/barcaderator/.attract/romlists/steam.txt
-(find ./home/barcaderator/.local/steam/snap -type f -name '*.mp4' | sed 's/^.*\///g' | sed 's/\.mp4$//g' | while read -r steam_id; do
+echo $'#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons;Series;Language;Region;Rating' >~/.attract/romlists/steam.txt
+(find ~/.local/steam/snap -type f -name '*.mp4' | sed 's/^.*\///g' | sed 's/\.mp4$//g' | while read -r steam_id; do
   # Query the Steam Store API
   response=$(curl -s "https://store.steampowered.com/api/appdetails?appids=$steam_id")
 
@@ -22,17 +24,17 @@ echo $'#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;
   if [[ -n "$game_name" && "$game_name" != "null" ]]; then
     echo "$steam_id;$game_name;steam;;;;;;;;;;;$game_name;;;;;;;"
   fi
-done) >>./home/barcaderator/.attract/romlists/steam.txt
+done) >>~/.attract/romlists/steam.txt
 
 #mame snap files (images and videos)
-mkdir -p home/barcaderator/.local/mame
+mkdir -p ~/.local/mame
 pushd . >/dev/null
-cd home/barcaderator/.local/mame
+cd ~/.local/mame
 b2 sync b2://barcaderator/mame/ .
 popd >/dev/null
 
-echo $'#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons;Series;Language;Region;Rating'>./home/barcaderator/.attract/romlists/mame.txt
-(for rom in $(find ./home/barcaderator/.local/mame/roms -maxdepth 1 -type f | sed 's/^.*\///g' | grep -v '^roms$' | sed 's/\.\(zip\|7z\)$//g'); do
+echo $'#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons;Series;Language;Region;Rating'>~/.attract/romlists/mame.txt
+(for rom in $(find ~/.local/mame/roms -maxdepth 1 -type f | sed 's/^.*\///g' | grep -v '^roms$' | sed 's/\.\(zip\|7z\)$//g'); do
   mame -listxml "$rom" | yq -p=xml -o=json | jq -r '
     .mame.machine[0] |
     ."+@name" + ";" +
@@ -47,4 +49,4 @@ echo $'#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;
       .input.control."+@type" + " (" + (.input.control."+@ways" // "") + ")"
     end) +
     ";good;1;raster;;;;1;;;;"'
-done) 2>&1 | grep -v 'jq: error' | grep -v BIOS | grep -v '^neogeo;' | sort | uniq >>./home/barcaderator/.attract/romlists/mame.txt
+done) 2>&1 | grep -v 'jq: error' | grep -v BIOS | grep -v '^neogeo;' | sort | uniq >>~/.attract/romlists/mame.txt

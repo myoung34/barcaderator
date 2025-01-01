@@ -45,6 +45,8 @@
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.xfce.enable = true;
 
+  programs.firefox.enable = false;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -95,9 +97,6 @@
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "barcaderator";
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
   programs.git = {
     enable = true;
     #extraConfig.init.defaultBranch = "main";
@@ -145,12 +144,6 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
