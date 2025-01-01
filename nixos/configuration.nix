@@ -81,7 +81,7 @@
   users.users.barcaderator = {
     isNormalUser = true;
     description = "barcaderator";
-    extraGroups = [ "networkmanager" "wheel" "barcaderator" ];
+    extraGroups = [ "networkmanager" "wheel" "barcaderator" "input" ];
     packages = with pkgs; [
     ];
   };
@@ -115,6 +115,14 @@
   ];
   nix.extraOptions = ''
   experimental-features = nix-command flakes
+  '';
+
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="d209", GROUP="users", MODE="0666"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="fafa", GROUP="users", MODE="0666"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="03eb", GROUP="users", MODE="0666"
+    
+    KERNEL=="event*", NAME="input/%k", MODE="0666", GROUP="input"
   '';
 
   environment.etc."xdg/autostart/attract.desktop".text = ''
