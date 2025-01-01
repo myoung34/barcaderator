@@ -62,6 +62,7 @@
     detect-secrets
     jq
     yq-go
+    ledspicer
   ];
 
   home.file = { 
