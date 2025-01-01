@@ -97,11 +97,6 @@
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "barcaderator";
 
-  programs.git = {
-    enable = true;
-    #extraConfig.init.defaultBranch = "main";
-    config.init.defaultBranch = "main";
-  };
   hardware.graphics = { 
     enable = true;
     enable32Bit = true;

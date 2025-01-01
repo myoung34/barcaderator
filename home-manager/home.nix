@@ -71,10 +71,6 @@
       source = ../home/barcaderator/.mame;
       recursive = true;
     };
-    ".gitconfig" = {
-      source = ../home/barcaderator/.gitconfig;
-      recursive = false;
-    };
   };
 
   xfconf = {
@@ -102,7 +98,26 @@
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "Mark Young";
+    userEmail = "myoung34@my.apsu.edu";
+    aliases = {
+      co = "checkout";
+      st = "status";
+    };
+    extraConfig = {
+      init.defaultBranch = "main";
+      merge = {
+        tool = "vimdiff";
+        conflictstyle = "diff3";
+      };
+      pull = {
+        rebase=true;
+      };
+      mergetool.prompt = "false";
+    };
+  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
