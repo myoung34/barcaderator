@@ -18,7 +18,7 @@ python3Packages.buildPythonApplication rec {
     owner = "Backblaze";
     repo = "B2_Command_Line_Tool";
     rev = "refs/tags/v${version}";
-    hash = "sha256-/P1cgAC+a2YCcvbsysYdD+fEwibo+GyE0XY4A0+gMh4=";
+    hash = "sha256-/P1cgAC+a2YCcvbsysYdD+fEwibo+GyE0XY4A0+gMh4="; # pragma: allowlist secret
   };
 
   nativeBuildInputs = [
