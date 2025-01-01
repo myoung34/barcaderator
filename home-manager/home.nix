@@ -75,10 +75,6 @@
       source = ../home/barcaderator/.local/steam;
       recursive = true;
     };
-    ".xprofile" = {
-      source = ../home/barcaderator/.xprofile;
-      recursive = false;
-    };
     ".gitconfig" = {
       source = ../home/barcaderator/.gitconfig;
       recursive = false;

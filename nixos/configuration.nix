@@ -123,6 +123,15 @@
   experimental-features = nix-command flakes
   '';
 
+  environment.etc."xdg/autostart/attract.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=Attract
+    Exec=/home/barcaderator/.nix-profile/bin/attract
+    X-GNOME-Autostart-enabled=true
+    X-GNOME-Autostart-Delay=10
+  '';
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
