@@ -28,6 +28,11 @@ stdenv.mkDerivation rec {
     [ -d config ] || mkdir config
     [ -d m4 ] || mkdir m4
     autoreconf --force --install -I config -I m4
+   
+    find . -name Makefile.am -exec sed -i -r 's/-DPACKAGE_DATA_DIR=.*/-DPACKAGE_DATA_DIR=\\"\/etc\/ledspicer\/data\/\\" \\/g'  {} \;
+    find . -name Makefile.am -exec sed -i -r 's/-DACTORS_DIR=.*/-DACTORS_DIR=\\"\/etc\/ledspicer\/actors\/\\" \\/g'  {} \;
+    find . -name Makefile.am -exec sed -i -r 's/-DDEVICES_DIR=.*/-DDEVICES_DIR=\\"\/etc\/ledspicer\/devices\/\\" \\/g'  {} \;
+    find . -name Makefile.am -exec sed -i -r 's/-DINPUTS_DIR=.*/-DINPUTS_DIR=\\"\/etc\/ledspicer\/inputs\/\\" \\/g'  {} \;
   '';
 
   configureFlags = [
