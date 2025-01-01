@@ -28,23 +28,13 @@ stdenv.mkDerivation rec {
     [ -d config ] || mkdir config
     [ -d m4 ] || mkdir m4
     autoreconf --force --install -I config -I m4
-   
+    # the following prevents non-privileged build from failing to make /etc/ledspicer/data directories that happen with ./configure --datadir=
     find . -name Makefile.am -exec sed -i -r 's/-DPACKAGE_DATA_DIR=.*/-DPACKAGE_DATA_DIR=\\"\/etc\/ledspicer\/data\/\\" \\/g'  {} \;
-    find . -name Makefile.am -exec sed -i -r 's/-DACTORS_DIR=.*/-DACTORS_DIR=\\"\/etc\/ledspicer\/actors\/\\" \\/g'  {} \;
-    find . -name Makefile.am -exec sed -i -r 's/-DDEVICES_DIR=.*/-DDEVICES_DIR=\\"\/etc\/ledspicer\/devices\/\\" \\/g'  {} \;
-    find . -name Makefile.am -exec sed -i -r 's/-DINPUTS_DIR=.*/-DINPUTS_DIR=\\"\/etc\/ledspicer\/inputs\/\\" \\/g'  {} \;
   '';
-
-  configureFlags = [
-    "--sysconfdir=$out/etc"
-    "--enable-pulseaudio"
-    "--enable-pacled64"
-    "--disable-alsaaudio"
-  ];
 
   buildPhase = ''
     export CXXFLAGS="-s -O3"
-    ./configure --disable-static --disable-dependency-tracking --prefix=$out
+    ./configure --disable-static --disable-dependency-tracking --prefix=$out --enable-pulseaudio --enable-pacled64 --disable-alsaaudio
     make
   '';
 
