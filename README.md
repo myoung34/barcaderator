@@ -7,6 +7,8 @@ My NixOS build configuration for my arcade.
 * Steam
 * TODO: ledspicer for the buttons
 
+![](images/barcade.gif)
+
 ### Pulling roms and generating metadata ###
 
 To prevent violating github ToS my roms, snaps, and videos are in b2
