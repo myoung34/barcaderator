@@ -60,6 +60,8 @@
     backblaze-b2 # was removed after 24.05 from https://github.com/NixOS/nixpkgs/blob, pulled into ./pkgs/
     pre-commit
     detect-secrets
+    jq
+    yq-go
   ];
 
   home.file = { 
