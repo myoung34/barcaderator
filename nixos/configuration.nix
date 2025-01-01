@@ -103,9 +103,9 @@
     #extraConfig.init.defaultBranch = "main";
     config.init.defaultBranch = "main";
   };
-  hardware.opengl = { 
+  hardware.graphics = { 
     enable = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   # Allow unfree packages
