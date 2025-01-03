@@ -63,6 +63,7 @@
     jq
     yq-go
     ledspicer
+    usbutils
   ];
 
   home.file = { 
