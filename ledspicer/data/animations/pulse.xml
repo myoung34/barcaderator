@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LEDSpicer version="1.0" type="Animation">
+    <actor
+        type="PulseAudio"
+        group="Player1"
+        filter="Normal"
+        mode="VuMeter"
+        direction="Forward"
+        off="DarkCyan"
+        low="Blue"
+        mid="Red"
+        high="White"
+        channel="Both"
+    />
+    <actor
+        type="PulseAudio"
+        group="Player2"
+        filter="Normal"
+        mode="VuMeter"
+        direction="Forward"
+        off="Red"
+        low="DarkCyan"
+        mid="Blue"
+        high="Green"
+        channel="Both"
+    />
+</LEDSpicer>
