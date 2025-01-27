@@ -6,7 +6,10 @@ mkdir -p ~/.attract/romlists
 mkdir -p ~/.local/steam
 pushd . >/dev/null
 cd ~/.local/steam
-b2 sync b2://barcaderator/steam/ .
+aws-vault exec -n fastly -- \
+  aws s3 \
+  --endpoint-url https://us-east.object.fastlystorage.app \
+  sync s3://marktest/steam .
 popd >/dev/null
 
 echo $'#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons;Series;Language;Region;Rating' >~/.attract/romlists/steam.txt
@@ -30,7 +33,10 @@ done) >>~/.attract/romlists/steam.txt
 mkdir -p ~/.local/mame
 pushd . >/dev/null
 cd ~/.local/mame
-b2 sync b2://barcaderator/mame/ .
+aws-vault exec -n fastly -- \
+  aws s3 \
+  --endpoint-url https://us-east.object.fastlystorage.app \
+  sync s3://marktest/mame .
 popd >/dev/null
 
 echo $'#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons;Series;Language;Region;Rating'>~/.attract/romlists/mame.txt
