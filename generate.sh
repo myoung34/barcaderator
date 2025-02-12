@@ -9,7 +9,7 @@ cd ~/.local/steam
 aws-vault exec -n fastly -- \
   aws s3 \
   --endpoint-url https://us-east.object.fastlystorage.app \
-  sync s3://marktest/steam .
+  sync s3://arcade/steam .
 popd >/dev/null
 
 echo $'#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons;Series;Language;Region;Rating' >~/.attract/romlists/steam.txt
@@ -36,7 +36,7 @@ cd ~/.local/mame
 aws-vault exec -n fastly -- \
   aws s3 \
   --endpoint-url https://us-east.object.fastlystorage.app \
-  sync s3://marktest/mame .
+  sync s3://arcade/mame .
 popd >/dev/null
 
 echo $'#Name;Title;Emulator;CloneOf;Year;Manufacturer;Category;Players;Rotation;Control;Status;DisplayCount;DisplayType;AltRomname;AltTitle;Extra;Buttons;Series;Language;Region;Rating'>~/.attract/romlists/mame.txt
