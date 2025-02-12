@@ -5,13 +5,13 @@ My NixOS build configuration for my arcade.
 * Attract-mode + [mvscomplete layout](https://github.com/keilmillerjr/mvscomplete-layout)
 * Mame
 * Steam
-* TODO: ledspicer for the buttons
+* LedSpicer for the buttons
 
 ![](images/barcade.gif)
 
 ### Pulling roms and generating metadata ###
 
-To prevent violating github ToS my roms, snaps, and videos are in b2
+To prevent violating github ToS my roms, snaps, and videos are in fastly object store
 To pull and generate the files:
 
 ```

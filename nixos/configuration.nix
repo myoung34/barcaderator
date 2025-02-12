@@ -134,8 +134,6 @@
       X-GNOME-Autostart-enabled=true
       X-GNOME-Autostart-Delay=10
     '';
-
-    ledspicer.source = ../ledspicer;
   };
 
 

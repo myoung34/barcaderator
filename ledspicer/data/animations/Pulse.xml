@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LEDSpicer version="1.0" type="Animation">
     <actor
-        type="PulseAudio"
+        type="PipeWire"
         group="Player1"
         filter="Normal"
         mode="VuMeter"
@@ -13,7 +13,7 @@
         channel="Both"
     />
     <actor
-        type="PulseAudio"
+        type="PipeWire"
         group="Player2"
         filter="Normal"
         mode="VuMeter"

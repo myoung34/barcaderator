@@ -2,7 +2,7 @@
 <LEDSpicer
         version="1.0"
         type="Profile"
-        backgroundColor="Black"
+        backgroundColor="Red"
 >
         <startTransition
                 type="Pulse"
