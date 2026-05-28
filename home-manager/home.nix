@@ -122,6 +122,17 @@
     };
   };
 
+  programs.google-chrome = {
+    enable = true;
+    # Custom package (e.g., for beta or dev versions)
+    package = pkgs.google-chrome; 
+    # Add startup flags
+    commandLineArgs = [
+      "--force-dark-mode"
+      "--ignore-gpu-blocklist"
+    ];
+  };
+
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
