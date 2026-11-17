@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LEDSpicer version="1.0" type="Animation">
+	<actor
+		type="Gradient"
+		group="whole board as a circle"
+		filter="Normal"
+		speed="Slow"
+		direction="Forward"
+		mode="Cyclic"
+		colors="Red,Yellow,Green,Cyan,Blue,Magenta"
+	/>
+</LEDSpicer>

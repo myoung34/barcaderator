@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Base for crafted per-game profiles (emitter LoadProfileByEmulator <rom> arcade).
+     Everything off; LEDSpicer turns on only the buttons the game uses. -->
+<LEDSpicer version="1.0" type="Profile" backgroundColor="Black"/>

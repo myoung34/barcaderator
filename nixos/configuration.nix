@@ -125,6 +125,9 @@
     KERNEL=="event*", NAME="input/%k", MODE="0666", GROUP="input"
   '';
 
+  # LEDSpicer has its data dir compiled in as /etc/ledspicer/data/ (see pkgs/ledspicer).
+  environment.etc."ledspicer/data".source = ../ledspicer/data;
+
   environment.etc."xdg/autostart/attract.desktop".text = ''
     [Desktop Entry]
     Type=Application

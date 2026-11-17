@@ -7,7 +7,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  ledspicerConf = "/etc/ledspicer/data/ledspicer.conf";
+in {
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -63,7 +65,27 @@
     yq-go
     usbutils
     ledspicer
+    # Attract-mode launches MAME through this so the buttons light per game.
+    (writeShellScriptBin "mame-led" ''
+      export PATH=${mame}/bin:$PATH # emitter runs `mame -lx <rom>`
+      conf=${ledspicerConf}
+      ${ledspicer}/bin/emitter -c "$conf" LoadProfileByEmulator "''${!#}" arcade || true
+      mame "$@"
+      rc=$?
+      ${ledspicer}/bin/emitter -c "$conf" FinishLastProfile || true
+      exit $rc
+    '')
   ];
+
+  systemd.user.services.ledspicerd = {
+    Unit.Description = "LEDSpicer button LED daemon";
+    Service = {
+      ExecStart = "${pkgs.ledspicer}/bin/ledspicerd -f -c ${ledspicerConf}";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
+    Install.WantedBy = [ "default.target" ];
+  };
 
   home.file = { 
     ".attract" = {

@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LEDSpicer
-        version="1.0"
-        type="Profile"
-        backgroundColor="Red"
->
-        <startTransition
-                type="Pulse"
-                color="Yellow"
-                speed="Fast"
-                filter="Combine"
-                direction="ForwardBouncing"
-        />
-        <endTransition
-                type="Pulse"
-                color="Yellow"
-                speed="Fast"
-                filter="Combine"
-                direction="ForwardBouncing"
-        />
+<!-- Attract-mode idle: rainbow cycling around both button clusters. -->
+<LEDSpicer version="1.0" type="Profile" backgroundColor="Black">
+	<animations>
+		<animation name="Idle"/>
+	</animations>
 </LEDSpicer>
