@@ -56,7 +56,10 @@ in {
       # A first launch runs an install-script step, then the game, under
       # separate reapers; only stop once none comes back.
       while :; do
+        start=$SECONDS
         while running; do hide; sleep 2; done
+        # A real play session ran; don't wait for a relaunch.
+        (( SECONDS - start > 60 )) && break
         for _ in $(seq 30); do running && continue 2; hide; sleep 1; done
         break
       done
