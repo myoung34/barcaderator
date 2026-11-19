@@ -89,7 +89,8 @@ in {
       running() { ${procps}/bin/pgrep -f "[S]teamLaunch AppId=$id " >/dev/null; }
       ${ledspicer}/bin/emitter -c "$conf" LoadProfile "steam/$id" || true
       # Starts Steam if needed (then it keeps running), so don't wait on it.
-      ${steam}/bin/steam "steam://rungameid/$id" &
+      # -silent keeps a cold-started Steam's main window from covering Attract.
+      ${steam}/bin/steam -silent "steam://rungameid/$id" &
       for _ in $(seq 180); do running && break; sleep 1; done
       # A first launch runs an install-script step, then the game, under
       # separate reapers; only stop once none comes back.
