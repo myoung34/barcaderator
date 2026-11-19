@@ -23,14 +23,14 @@ bash generate.sh
 Apply the system and home-manager config (home-manager runs as a NixOS module):
 
 ```
-sudo nixos-rebuild switch --flake .#barcaderator
+nixos-rebuild switch --sudo --flake .#barcaderator
 ```
 
 Upgrade nixpkgs/home-manager:
 
 ```
 nix flake update
-sudo nixos-rebuild switch --flake .#barcaderator
+nixos-rebuild switch --sudo --flake .#barcaderator
 ```
 
 Garbage collection runs weekly (generations older than 30 days) and the boot
