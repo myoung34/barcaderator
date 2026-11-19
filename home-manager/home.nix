@@ -41,16 +41,23 @@ in {
       id=$1
       conf=${ledspicerConf}
       running() { ${procps}/bin/pgrep -f "[S]teamLaunch AppId=$id " >/dev/null; }
+      # Slow launches can pop Steam's library window over Attract. Closing it
+      # just hides it to the background; Steam keeps running.
+      hide() {
+        ${wmctrl}/bin/wmctrl -lx \
+          | ${gawk}/bin/awk '$3 == "steamwebhelper.steam" && $5 == "Steam" && NF == 5 {print $1}' \
+          | while read -r w; do ${wmctrl}/bin/wmctrl -i -c "$w"; done
+      }
       ${ledspicer}/bin/emitter -c "$conf" LoadProfile "steam/$id" || true
       # Starts Steam if needed (then it keeps running), so don't wait on it.
       # -silent keeps a cold-started Steam's main window from covering Attract.
       ${steam}/bin/steam -silent "steam://rungameid/$id" &
-      for _ in $(seq 180); do running && break; sleep 1; done
+      for _ in $(seq 180); do running && break; hide; sleep 1; done
       # A first launch runs an install-script step, then the game, under
       # separate reapers; only stop once none comes back.
       while :; do
-        while running; do sleep 2; done
-        for _ in $(seq 30); do running && continue 2; sleep 1; done
+        while running; do hide; sleep 2; done
+        for _ in $(seq 30); do running && continue 2; hide; sleep 1; done
         break
       done
       ${ledspicer}/bin/emitter -c "$conf" FinishLastProfile || true
