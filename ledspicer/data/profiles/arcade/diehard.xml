@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Punch, kick, jump (3-button panel); MAME's ST-V port declares 4. -->
+<LEDSpicer version="1.0" type="Profile" backgroundColor="Black">
+	<alwaysOnElements>
+		<element name="P1_BUTTON1"/>
+		<element name="P1_BUTTON2"/>
+		<element name="P1_BUTTON3"/>
+		<element name="P2_BUTTON1"/>
+		<element name="P2_BUTTON2"/>
+		<element name="P2_BUTTON3"/>
+	</alwaysOnElements>
+</LEDSpicer>

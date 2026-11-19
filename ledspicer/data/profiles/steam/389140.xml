@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Horizon Chase Turbo: accelerate A/RT, brake B/LT, nitro X (InControl bindings in Assembly-CSharp.dll). -->
+<LEDSpicer version="1.0" type="Profile" backgroundColor="Black">
+	<alwaysOnElements>
+		<element name="P1_BUTTON1"/>
+		<element name="P1_BUTTON5"/>
+		<element name="P1_BUTTON6"/>
+		<element name="P1_BUTTON7"/>
+		<element name="P1_BUTTON8"/>
+		<element name="P2_BUTTON1"/>
+		<element name="P2_BUTTON5"/>
+		<element name="P2_BUTTON6"/>
+		<element name="P2_BUTTON7"/>
+		<element name="P2_BUTTON8"/>
+	</alwaysOnElements>
+</LEDSpicer>

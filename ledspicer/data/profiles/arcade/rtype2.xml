@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fire, force (controls.ini); MAME's shared M72 port declares 4. -->
+<LEDSpicer version="1.0" type="Profile" backgroundColor="Black">
+	<alwaysOnElements>
+		<element name="P1_BUTTON1"/>
+		<element name="P1_BUTTON2"/>
+		<element name="P2_BUTTON1"/>
+		<element name="P2_BUTTON2"/>
+	</alwaysOnElements>
+</LEDSpicer>
