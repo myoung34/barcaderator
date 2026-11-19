@@ -1,5 +1,14 @@
-{ lib, stdenv, fetchFromGitHub, autoreconfHook, pkg-config, pulseaudio, libusb1, automake, autoconf, libtool, tinyxml-2, libpthreadstubs, alsa-lib}:
-
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  autoreconfHook,
+  pkg-config,
+  pulseaudio,
+  libusb1,
+  tinyxml-2,
+  libpthreadstubs,
+}:
 stdenv.mkDerivation rec {
   pname = "ledspicer";
   version = "0.6.3.1";
@@ -7,45 +16,25 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "meduzapat";
     repo = "ledspicer";
-    rev = "${version}";
-    sha256 = "sha256-PCtvwjyk0ESpJpz/r/+uZCxvPctYRvOi0/ffWe4kNso="; # pragma: allowlist secret
+    rev = version;
+    hash = "sha256-PCtvwjyk0ESpJpz/r/+uZCxvPctYRvOi0/ffWe4kNso="; # pragma: allowlist secret
   };
 
-  nativeBuildInputs = [ autoreconfHook pkg-config ];
-  buildInputs = [
-    pulseaudio
-    libusb1
-    tinyxml-2
-    automake
-    autoconf
-    libtool
-    libpthreadstubs
-    alsa-lib
-  ];
+  nativeBuildInputs = [autoreconfHook pkg-config];
+  buildInputs = [pulseaudio libusb1 tinyxml-2 libpthreadstubs];
 
-  preConfigure = ''
-    aclocal
-    [ -d config ] || mkdir config
-    [ -d m4 ] || mkdir m4
-    autoreconf --force --install -I config -I m4
-    # the following prevents non-privileged build from failing to make /etc/ledspicer/data directories that happen with ./configure --datadir=
-    find . -name Makefile.am -exec sed -i -r 's/-DPACKAGE_DATA_DIR=.*/-DPACKAGE_DATA_DIR=\\"\/etc\/ledspicer\/data\/\\" \\/g'  {} \;
+  # Bake in the writable data dir NixOS links to (see nixos/configuration.nix),
+  # instead of the read-only $out/share.
+  postPatch = ''
+    find . -name Makefile.am -exec sed -i -r 's|-DPACKAGE_DATA_DIR=[^ ]*|-DPACKAGE_DATA_DIR=\\"/etc/ledspicer/data/\\"|' {} +
   '';
 
-  buildPhase = ''
-    export CXXFLAGS="-s -O3"
-    ./configure --disable-static --disable-dependency-tracking --prefix=$out --enable-pulseaudio --enable-pacled64 --disable-alsaaudio
-    make
-  '';
+  configureFlags = ["--enable-pulseaudio" "--enable-pacled64" "--disable-alsaaudio"];
 
-  installPhase = ''
-    make DESTDIR=$out/../../.. install
-  '';
-
-  meta = with lib; {
+  meta = {
     description = "LEDSpicer for controlling RGB LEDs";
     homepage = "https://github.com/meduzapat/ledspicer";
-    license = licenses.gpl3Plus;
-    mainProgram = "ledspicer";
+    license = lib.licenses.gpl3Plus;
+    mainProgram = "ledspicerd";
   };
 }
