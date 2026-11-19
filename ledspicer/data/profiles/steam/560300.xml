@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Thy Sword: RB attack, LB block, B bow, Y special, A jump (switchaboo review, positional; B=bow confirmed on box). -->
+<LEDSpicer version="1.0" type="Profile" backgroundColor="Black">
+	<alwaysOnElements>
+		<element name="P1_BUTTON2"/>
+		<element name="P1_BUTTON3"/>
+		<element name="P1_BUTTON4"/>
+		<element name="P1_BUTTON5"/>
+		<element name="P1_BUTTON6"/>
+		<element name="P2_BUTTON2"/>
+		<element name="P2_BUTTON3"/>
+		<element name="P2_BUTTON4"/>
+		<element name="P2_BUTTON5"/>
+		<element name="P2_BUTTON6"/>
+	</alwaysOnElements>
+</LEDSpicer>

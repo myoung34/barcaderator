@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mortal Kombat 11: X/Y punches, A/B kicks, LB throw, RB interact, RT block, LT flip stance (magicgameworld). -->
+<LEDSpicer version="1.0" type="Profile" backgroundColor="Black">
+	<alwaysOnElements>
+		<element name="P1_BUTTON1"/>
+		<element name="P1_BUTTON2"/>
+		<element name="P1_BUTTON3"/>
+		<element name="P1_BUTTON4"/>
+		<element name="P1_BUTTON5"/>
+		<element name="P1_BUTTON6"/>
+		<element name="P1_BUTTON7"/>
+		<element name="P1_BUTTON8"/>
+		<element name="P2_BUTTON1"/>
+		<element name="P2_BUTTON2"/>
+		<element name="P2_BUTTON3"/>
+		<element name="P2_BUTTON4"/>
+		<element name="P2_BUTTON5"/>
+		<element name="P2_BUTTON6"/>
+		<element name="P2_BUTTON7"/>
+		<element name="P2_BUTTON8"/>
+	</alwaysOnElements>
+</LEDSpicer>

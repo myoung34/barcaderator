@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Super Bit Blaster XL: Unity reads raw buttons 0-3 (A boost, B brake, Y shoot, X bomb), not the pad map (InputManager in data.unity3d). -->
+<LEDSpicer version="1.0" type="Profile" backgroundColor="Black">
+	<alwaysOnElements>
+		<element name="P1_BUTTON1"/>
+		<element name="P1_BUTTON2"/>
+		<element name="P1_BUTTON3"/>
+		<element name="P1_BUTTON4"/>
+		<element name="P2_BUTTON1"/>
+		<element name="P2_BUTTON2"/>
+		<element name="P2_BUTTON3"/>
+		<element name="P2_BUTTON4"/>
+	</alwaysOnElements>
+</LEDSpicer>

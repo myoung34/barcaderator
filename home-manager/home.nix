@@ -9,6 +9,13 @@
   ...
 }: let
   ledspicerConf = "/etc/ledspicer/data/ledspicer.conf";
+  # No SDL mapping exists for the DragonRise encoders (0079:0006), so Steam games
+  # don't see them as gamepads. Xbox arcade-stick layout: back row X Y RB LB
+  # (buttons 1-4), front row A B RT LT (5-8), coin = back, start = start.
+  # Scoped to Steam: a global SDL mapping would renumber MAME's buttons.
+  steam = pkgs.steam.override {
+    extraEnv.SDL_GAMECONTROLLERCONFIG = "03000000790000000600000010010000,DragonRise Arcade Encoder,x:b0,y:b1,rightshoulder:b2,leftshoulder:b3,a:b4,b:b5,righttrigger:b6,lefttrigger:b7,back:b8,start:b9,leftx:a0,lefty:a1,platform:Linux,";
+  };
 in {
   # You can import other home-manager modules here
   imports = [
@@ -56,7 +63,7 @@ in {
   programs.firefox.enable = false;
 
   home.packages = with pkgs; [ 
-    steam 
+    steam
     attract-mode
     mame
     pre-commit
@@ -74,6 +81,24 @@ in {
       rc=$?
       ${ledspicer}/bin/emitter -c "$conf" FinishLastProfile || true
       exit $rc
+    '')
+    # Same for Steam: light profiles/steam/<appid>.xml while the game runs.
+    (writeShellScriptBin "steam-led" ''
+      id=$1
+      conf=${ledspicerConf}
+      running() { ${procps}/bin/pgrep -f "[S]teamLaunch AppId=$id " >/dev/null; }
+      ${ledspicer}/bin/emitter -c "$conf" LoadProfile "steam/$id" || true
+      # Starts Steam if needed (then it keeps running), so don't wait on it.
+      ${steam}/bin/steam "steam://rungameid/$id" &
+      for _ in $(seq 180); do running && break; sleep 1; done
+      # A first launch runs an install-script step, then the game, under
+      # separate reapers; only stop once none comes back.
+      while :; do
+        while running; do sleep 2; done
+        for _ in $(seq 30); do running && continue 2; sleep 1; done
+        break
+      done
+      ${ledspicer}/bin/emitter -c "$conf" FinishLastProfile || true
     '')
   ];
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fire, thrust, hyperspace; MAME rotates with the stick and lists 5 buttons. Alternating, so P2 shares P1. -->
+<LEDSpicer version="1.0" type="Profile" backgroundColor="Black">
+	<alwaysOnElements>
+		<element name="P1_BUTTON1"/>
+		<element name="P1_BUTTON2"/>
+		<element name="P1_BUTTON3"/>
+	</alwaysOnElements>
+</LEDSpicer>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Super Meat Boy (1 player): A jump, X run (buttonmap.cfg; SDL game controller API). -->
+<LEDSpicer version="1.0" type="Profile" backgroundColor="Black">
+	<alwaysOnElements>
+		<element name="P1_BUTTON1"/>
+		<element name="P1_BUTTON5"/>
+	</alwaysOnElements>
+</LEDSpicer>

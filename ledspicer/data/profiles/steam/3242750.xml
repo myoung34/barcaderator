@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Level Devil: jump is raw button 2; Defold uses its own DragonRise mapping, not the pad map (tested on box). -->
+<LEDSpicer version="1.0" type="Profile" backgroundColor="Black">
+	<alwaysOnElements>
+		<element name="P1_BUTTON3"/>
+		<element name="P2_BUTTON3"/>
+	</alwaysOnElements>
+</LEDSpicer>
