@@ -1,13 +1,4 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   ledspicerConf = "/etc/ledspicer/data/ledspicer.conf";
   # No SDL mapping exists for the DragonRise encoders (0079:0006), so Steam games
   # don't see them as gamepads. Xbox arcade-stick layout: back row X Y RB LB
@@ -17,52 +8,12 @@
     extraEnv.SDL_GAMECONTROLLERCONFIG = "03000000790000000600000010010000,DragonRise Arcade Encoder,x:b0,y:b1,rightshoulder:b2,leftshoulder:b3,a:b4,b:b5,righttrigger:b6,lefttrigger:b7,back:b8,start:b9,leftx:a0,lefty:a1,platform:Linux,";
   };
 in {
-  # You can import other home-manager modules here
-  imports = [
-    # If you want to use modules your own flake exports (from modules/home-manager):
-    # outputs.homeManagerModules.example
-
-    # Or modules exported from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModules.default
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
-  ];
-
-  nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
-    ];
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-    };
-  };
-
   home = {
     username = "barcaderator";
     homeDirectory = "/home/barcaderator";
   };
 
-  # programs.neovim.enable = true;
-  programs.firefox.enable = false;
-
-  home.packages = with pkgs; [ 
+  home.packages = with pkgs; [
     steam
     attract-mode
     mame
@@ -113,7 +64,7 @@ in {
     Install.WantedBy = [ "default.target" ];
   };
 
-  home.file = { 
+  home.file = {
     ".attract" = {
       source = ../home/barcaderator/.attract;
       recursive = true;
@@ -147,43 +98,33 @@ in {
     };
   };
 
-  # Enable home-manager and git
-  programs.home-manager.enable = true;
   programs.git = {
     enable = true;
-    userName = "Mark Young";
-    userEmail = "myoung34@my.apsu.edu";
-    aliases = {
-      co = "checkout";
-      st = "status";
-    };
-    extraConfig = {
+    settings = {
+      user.name = "Mark Young";
+      user.email = "myoung34@my.apsu.edu";
+      alias = {
+        co = "checkout";
+        st = "status";
+      };
       init.defaultBranch = "main";
       merge = {
         tool = "vimdiff";
         conflictstyle = "diff3";
       };
-      pull = {
-        rebase=true;
-      };
+      pull.rebase = true;
       mergetool.prompt = "false";
     };
   };
 
   programs.google-chrome = {
     enable = true;
-    # Custom package (e.g., for beta or dev versions)
-    package = pkgs.google-chrome; 
-    # Add startup flags
     commandLineArgs = [
       "--force-dark-mode"
       "--ignore-gpu-blocklist"
     ];
   };
 
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
-
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  # Release of the first install; don't bump on upgrades.
   home.stateVersion = "24.11";
 }
