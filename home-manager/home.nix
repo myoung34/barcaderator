@@ -6,6 +6,9 @@
   # Scoped to Steam: a global SDL mapping would renumber MAME's buttons.
   steam = pkgs.steam.override {
     extraEnv.SDL_GAMECONTROLLERCONFIG = "03000000790000000600000010010000,DragonRise Arcade Encoder,x:b0,y:b1,rightshoulder:b2,leftshoulder:b3,a:b4,b:b5,righttrigger:b6,lefttrigger:b7,back:b8,start:b9,leftx:a0,lefty:a1,platform:Linux,";
+    # Level Devil (native Defold build) needs libGLU.so.1. The 24.11 Steam
+    # environment happened to include it; 26.05 doesn't.
+    extraLibraries = p: [p.libGLU];
   };
 in {
   home = {
